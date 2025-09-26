@@ -1,45 +1,33 @@
 # 🌐 Mi Portafolio Personal
 
-Este es mi proyecto personal desarrollado con **HTML, CSS y JavaScript**, donde voy mostrando mi aprendizaje y avances en programación web y ciencia de datos.  
-La idea es mantenerlo actualizado día a día como mi carta de presentación.
+> Proyecto personal desarrollado con **HTML, CSS y JavaScript** donde documento mi aprendizaje y avances en **programación web** y **ciencia de datos**.  
+> Mi objetivo es mantenerlo **actualizado día a día** como carta de presentación profesional.
+
+[![Status](https://img.shields.io/badge/status-en%20construcci%C3%B3n-ffcc00)](#)
+[![Hecho con](https://img.shields.io/badge/hecho%20con-HTML%2FCSS%20%26%20JS-0b84f3)](#)
+[![Deploy](https://img.shields.io/badge/deploy-GitHub%20Pages-24292e)](#)
+[![Licencia](https://img.shields.io/badge/licencia-MIT-34c759)](#)
 
 ---
 
 ## 🚀 Demo en línea
-👉 [Ver Portafolio en GitHub Pages](https://pablor95.github.io/mi-portafolio/)
+- 🌍 **Portafolio:** https://pablor95.github.io/mi-portafolio/
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)  
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)  
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)  
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)  
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white)
+- HTML5  
+- CSS3 (Flexbox, Grid)  
+- JavaScript (DOM, eventos)  
+- Git & GitHub  
+- GitHub Pages (deploy)
 
 ---
 
 ## 📂 Estructura del proyecto
-
+```text
 mi-portafolio/
-│── index.html # Página principal
-│── styles.css # Estilos CSS
-│── script.js # Funciones JS
-│── assets/ # Imágenes, íconos y otros recursos
-
-
----
-
-## ✨ Próximos pasos
-- [ ] Añadir sección **Proyectos Web**.  
-- [ ] Incluir ejemplos de **Ciencia de Datos**.  
-- [ ] Mejorar diseño con **CSS avanzado** (transiciones, grid, flexbox).  
-- [ ] Conectar con API externas para datos dinámicos.  
-
----
-
-## 📧 Contacto
-Si quieres ver más de mi trabajo o ponerte en contacto:  
-**Pablo R.**  
-📩 [pablo.ramirezdata@gmail.com]  
-  
+├─ index.html        # Página principal
+├─ styles.css        # Estilos CSS
+├─ script.js         # Funciones JS
+└─ assets/           # Imágenes, íconos y otros recursos
