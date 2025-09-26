@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Data science</title>
-    <meta name="description" content="Portafolio de Pablo Ramírez. Desarrollo web y ciencia de datos con Python, HTML, CSS y JavaScript."/>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="images/favicon.png" />
-    <script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Science</title>
+  <meta name="description" content="Portafolio de Pablo Ramírez. Desarrollo web y ciencia de datos con Python, HTML, CSS y JavaScript." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/favicon.png" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <!-- Encabezado con navegación -->
-
   <header class="site-header">
-    <a class="brand" href="#hero" aria-label="Inicio"> Pablo Ramírez<span>.</span></a>
+    <a class="brand" href="#hero" aria-label="Inicio">Pablo Ramírez<span>.</span></a>
 
     <!-- Botón para menú móvil -->
-    <button class="menu-toggle" 
-      aria-expanded="false" 
+    <button class="menu-toggle"
+      aria-expanded="false"
       aria-controls="nav"
       aria-label="Abrir menú">☰</button>
-        
+
     <nav id="nav" class="nav">
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proyectos">Proyectos</a>
@@ -29,80 +28,112 @@
     </nav>
   </header>
 
-  <!-- 2) Hero (primer impacto) -->
-
-  <section id="hero" class="hero">
-    <div class="container">
-      <h1>Hola, soy <span>Pablo Ramirez</span></h1>
-      <p>Desarrollador web en formación. Construyo interfaces limpias y analizo datos.</p>
-      <div class="cta">
-        <a class="btn" href="#proyectos">Ver Proyectos</a>
-        <a class="btn outline" href="#contacto">Contáctame</a>
+  <main>
+    <!-- 2) Hero (primer impacto) -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <h1>Hola, soy <span>Pablo Ramírez</span></h1>
+        <p>Desarrollador web en formación. Construyo interfaces limpias y analizo datos.</p>
+        <div class="cta">
+          <a class="btn" href="#proyectos">Ver Proyectos</a>
+          <a class="btn-outline" href="#contacto">Contáctame</a>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 3) Sección sobre mí -->
-  <section id="sobre-mi" class="section">
-    <div class="container">
-      <h2> Sobre mí</h2>
-      <p>Estudiante en formación con gran interés en el desarrollo de software y la ciencia de datos. Apasionado por crear soluciones prácticas con Python, HTML, CSS y JavaScript.</p>
-      <ul class="tags">
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>Python</li>
-        <li>Git</li>
-      </ul>  
-    </div>
-  </section>
-
-  <!-- 4) Sección Proyectos (cards)-->
-  <section id="proyectos" class="section alt">  
-    <div class="container">
-      <h2>Proyectos</h2>
-      <div class="grid">
-        <article class="card">
-          <img src="images/placeholder.webp" alt="Vista previa proyecto 1" loading="lazy" />
-          <div class="card-body">
-            <h3>Proyecto 1</h3>
-            <p> Descripción de proyecto</p> <!--TODO: Falta completar objetivo y tecnologias usadas-->
-            <div class="card-actions">
-              <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer">Demo</a>
-              <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer">Código</a>
-            </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="images/placeholder.webp" alt="Vista Previa Proyecto 2" loading="lazy" />
-          <div class="card-body">
-            <h3>Proyecto 2</h3>
-            <p> Descripción de proyecto</p> <!--TODO: Falta completar-->
-            <div class="card-actions">
-              <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer">Demo</a>
-              <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer">Código</a>
-            </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="images/placeholder.webp" alt="Vista previa proyecto 3" loading="lazy" />
-          <div class="card-body">
-            <h3>Proyecto 3</h3>
-            <p> Descripción de proyecto</p> <!--TODO: Falta completar objetivo y tecnologias usadas-->
-            <div class="card-actions">
-              <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer">Demo</a>
-              <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer">Código</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
     </section>
-    
-    
-    
 
+    <!-- 3) Sección sobre mí -->
+    <section id="sobre-mi" class="section">
+      <div class="container">
+        <h2>Sobre mí</h2>
+        <p>Estudiante en formación con gran interés en el desarrollo de software y la ciencia de datos. Apasionado por crear soluciones prácticas con Python, HTML, CSS y JavaScript.</p>
+        <ul class="tags">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Python</li>
+          <li>Git</li>
+        </ul>
+      </div>
+    </section>
 
+    <!-- 4) Sección Proyectos (cards) -->
+    <section id="proyectos" class="section alt">
+      <div class="container">
+        <h2>Proyectos</h2>
+        <div class="grid">
 
- </body>
+          <!-- Card Proyecto 1 -->
+          <article class="card">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto 1" loading="lazy" />
+            <div class="card-body">
+              <h3>Proyecto 1</h3>
+              <p>Descripción de proyecto</p> <!-- TODO: objetivo y tecnologías -->
+              <div class="card-actions">
+                <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer">Demo</a>
+                <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer">Código</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Proyecto 2 -->
+          <article class="card">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto 2" loading="lazy" />
+            <div class="card-body">
+              <h3>Proyecto 2</h3>
+              <p>Descripción de proyecto</p> <!-- TODO: objetivo y tecnologías -->
+              <div class="card-actions">
+                <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer">Demo</a>
+                <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer">Código</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Proyecto 3 -->
+          <article class="card">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto 3" loading="lazy" />
+            <div class="card-body">
+              <h3>Proyecto 3</h3>
+              <p>Descripción de proyecto</p> <!-- TODO: objetivo y tecnologías -->
+              <div class="card-actions">
+                <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer">Demo</a>
+                <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer">Código</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="section">
+      <div class="container">
+        <h2>Contacto</h2>
+        <form class="form" name="contacto" netlify>
+          <input type="hidden" name="form-name" value="contacto" />
+          <label>
+            Nombre
+            <input type="text" name="nombre" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Mensaje
+            <textarea name="mensaje" rows="4" required></textarea>
+          </label>
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Pablo Ramírez – Hecho con ❤️ en HTML, CSS y JavaScript</small>
+    </div>
+  </footer>
+</body>
 </html>
