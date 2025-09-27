@@ -381,50 +381,49 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   filter: none; /* en modo claro muestra el logo en su color original */
 }
 
-/* === Tema oscuro === */
-body {
-  background-color: #0d1117; /* fondo principal oscuro */
-  color: #e6edf3; /* texto claro */
+
+
+/* Forzamos dark en navegadores / motores */
+:root {
+  color-scheme: dark;
+
+  /* Si quieres igualar tonos exactos:
+     puedes ajustar aquí los tokens base y el resto
+     del archivo seguirá obedeciendo */
+  --bg: #0b1020;
+  --bg-alt: #141a2a;
+  --text: #e8ecf4;
+  --border: #1b2237;
+  /* Mantengo tu --brand y demás del bloque inicial */
 }
 
-nav {
-  background-color: #0d1117;
+/* Fondo y texto global según tokens */
+html, body {
+  background: var(--bg);
+  color: var(--text);
 }
 
-section {
-  background-color: #161b22; /* secciones un poco más claras */
-}
+/* Secciones coherentes con tokens */
+.section { background: var(--bg); }
+.section.alt { background: var(--bg-alt); }
 
-footer {
-  background-color: #0d1117;
-}
-
-button, .btn {
-  background-color: #21262d;
-  color: #e6edf3;
-  border: 1px solid #30363d;
-}
-
-button:hover, .btn:hover {
-  background-color: #30363d;
-}
-
-/* === Overrides oscuro consistentes (poner al final del styles.css) === */
-:root { color-scheme: dark; }
-
-html, body { background:#0b1020; color:#e8ecf4; }
-
+/* Header: fallback sólido + blur si hay soporte */
 .site-header{
-  position: sticky; top:0; z-index: 1000;
-  background: rgba(11,16,32,.85);                  /* fondo oscuro semitransparente */
-  -webkit-backdrop-filter: saturate(160%) blur(8px);
-  backdrop-filter: saturate(160%) blur(8px);
-  border-bottom: 1px solid #1b2237;                 /* línea sutil */
+  position: sticky; top: 0; z-index: 1000;
+  background: var(--bg);                /* fallback sin blur */
+  border-bottom: 1px solid var(--border);
+}
+@supports (backdrop-filter: blur(8px)) {
+  .site-header{
+    background: rgba(11,16,32,.85);
+    -webkit-backdrop-filter: saturate(160%) blur(8px);
+    backdrop-filter: saturate(160%) blur(8px);
+  }
 }
 
-/* nav: texto claro y sin bloques de fondo */
+/* Nav: texto claro y sin fondos accidentales */
 .nav a{
-  color:#e8ecf4;
+  color: var(--text) !important;
   background: transparent !important;
   padding: .25rem .5rem;
   border-radius: .375rem;
@@ -432,15 +431,11 @@ html, body { background:#0b1020; color:#e8ecf4; }
 }
 .nav a:hover{ color:#cddcff; }
 
-/* secciones */
-.section{ background:#0b1020; }
-.section.alt{ background:#141a2a; }
+/* Anclas con header fijo + scroll suave */
+html { scroll-behavior: smooth; }
+section { scroll-margin-top: 96px; }
 
-/* anclas con header fijo */
-html{ scroll-behavior:smooth; }
-section{ scroll-margin-top:96px; }
-
-/* botones/chips con contraste en oscuro */
+/* Botones/chips en oscuro */
 .btn{ background:#2c48f0; color:#fff; border:1px solid #2a3bb7; }
-.btn.outline, .btn-sm.btn-outline{ background:transparent; color:#e8ecf4; border:1px solid #2a3557; }
+.btn.outline, .btn-sm.btn-outline{ background:transparent; color:var(--text); border:1px solid #2a3557; }
 .chip{ background:#1a2239; color:#d7def0; border:1px solid #2a3557; }
