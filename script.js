@@ -1,163 +1,86 @@
 /* =========================================================
-   Utils
-========================================================= */
-const $  = (sel, root=document) => root.querySelector(sel);
-const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-
-/* Año dinámico */
-const yearEl = $('#year');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/* =========================================================
-   Tema claro/oscuro
-========================================================= */
-const root = document.documentElement;
-const themeBtn = $('#themeToggle');
-
-const systemPref = () =>
-  (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
-
-const applyTheme = (mode) => {
-  const isLight = mode === 'light';
-  root.classList.toggle('light', isLight);
-  if (themeBtn) themeBtn.setAttribute('aria-pressed', String(isLight));
-};
-
-applyTheme(localStorage.getItem('theme') || systemPref());
-
-themeBtn?.addEventListener('click', () => {
-  const isLight = root.classList.toggle('light');
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  themeBtn.setAttribute('aria-pressed', String(isLight));
-});
-
-/* =========================================================
-   Nav: aria-current según sección visible
+   Portafolio — JS
+   - Filtros en #proyectos
+   - Nav activo por sección visible
+   - Año dinámico en el footer
 ========================================================= */
 (() => {
-  const nav = $('#nav');
-  if (!nav) return;
+  'use strict';
 
-  const links = $$('#nav a');
-  const sections = [...document.querySelectorAll('main section[id]')];
+  /* ===== Año dinámico ===== */
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
 
-  const io = new IntersectionObserver((entries) => {
-    // La sección con mayor intersección “gana”
-    const vis = entries
-      .filter(e => e.isIntersecting)
-      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!vis) return;
+  /* ===== Filtros de proyectos ===== */
+  const filterBar = document.querySelector('#proyectos .filters');
+  const chips = filterBar ? filterBar.querySelectorAll('.chip') : [];
+  const cards = document.querySelectorAll('#proyectos .grid .card');
 
-    links.forEach(a => a.removeAttribute('aria-current'));
-    const hit = nav.querySelector(`a[href="#${vis.target.id}"]`);
-    if (hit) hit.setAttribute('aria-current', 'page');
-  }, { rootMargin: '-50% 0px -40% 0px', threshold: [0, .25, .5, .75, 1] });
-
-  sections.forEach(s => io.observe(s));
-})();
-
-/* =========================================================
-   Filtros de proyectos (usa data-tags en cada .card)
-   - Accesibilidad: aria-pressed + navegación teclado
-   - Persistencia: sessionStorage
-   - Deep-link: #proyectos?f=web
-========================================================= */
-(() => {
-  const section = $('#proyectos');
-  if (!section) return;
-
-  const btns = $$('.filters .chip', section);
-  const grid = $('.grid', section);
-  const cards = $$('.card', grid);
-
-  if (!btns.length || !cards.length) return;
-
-  const getFilterFromURL = () => {
-    const hash = location.hash || '';
-    const [, query] = hash.split('?');
-    if (!query) return null;
-    const params = new URLSearchParams(query);
-    return (params.get('f') || params.get('filter') || '').toLowerCase() || null;
-  };
-
-  const setFilterInURL = (tag) => {
-    const base = '#proyectos';
-    const qs = tag && tag !== 'all' ? `?f=${encodeURIComponent(tag)}` : '';
-    const newHash = `${base}${qs}`;
-    if (location.hash !== newHash) history.replaceState(null, '', newHash);
-  };
-
-  const showCard = (card, tag) => {
-    const tags = (card.dataset.tags || '').toLowerCase().split(/\s+/);
-    const visible = (tag === 'all') || tags.includes(tag);
-    card.style.display = visible ? '' : 'none';
-    card.setAttribute('aria-hidden', visible ? 'false' : 'true');
-  };
-
-  const setPressed = (activeBtn) => {
-    btns.forEach(b => {
-      const on = b === activeBtn;
-      b.classList.toggle('is-active', on);
-      b.setAttribute('aria-pressed', String(on));
-      b.tabIndex = on ? 0 : -1; // roving tabindex
+  function applyFilter(filter) {
+    cards.forEach(card => {
+      const tags = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
+      const show = filter === 'all' || tags.includes(filter);
+      card.style.display = show ? '' : 'none';
+      card.setAttribute('aria-hidden', show ? 'false' : 'true');
     });
-  };
+  }
 
-  const applyFilter = (tag) => {
-    const safe = tag || 'all';
-    cards.forEach(c => showCard(c, safe));
-    sessionStorage.setItem('projectFilter', safe);
-    setFilterInURL(safe);
-  };
+  function setActiveChip(btn) {
+    chips.forEach(c => {
+      const isActive = c === btn;
+      c.classList.toggle('is-active', isActive);
+      c.setAttribute('aria-pressed', String(isActive));
+    });
+  }
 
-  const activate = (btn, {focus=true} = {}) => {
-    if (!btn) return;
-    setPressed(btn);
-    const tag = (btn.dataset.filter || 'all').toLowerCase();
-    applyFilter(tag);
-    if (focus) btn.focus();
-  };
-
-  // Estado inicial: URL -> session -> 'all'
-  const urlFilter = getFilterFromURL();
-  const saved = sessionStorage.getItem('projectFilter');
-  const initialTag = (urlFilter || saved || 'all').toLowerCase();
-  const initialBtn = btns.find(b => (b.dataset.filter || '').toLowerCase() === initialTag) || btns[0];
-  activate(initialBtn, {focus:false});
-
-  // Clicks
-  btns.forEach(b => {
-    b.addEventListener('click', () => activate(b));
-  });
-
-  // Teclado (← → Home End, Enter/Espacio)
-  const moveFocus = (dir) => {
-    const idx = btns.findIndex(b => b.classList.contains('is-active'));
-    const next = (idx + dir + btns.length) % btns.length;
-    btns[next].focus();
-  };
-
-  btns.forEach(b => {
-    b.addEventListener('keydown', (e) => {
-      switch (e.key) {
-        case 'ArrowRight': e.preventDefault(); moveFocus(+1); break;
-        case 'ArrowLeft':  e.preventDefault(); moveFocus(-1); break;
-        case 'Home':       e.preventDefault(); btns[0].focus(); break;
-        case 'End':        e.preventDefault(); btns[btns.length-1].focus(); break;
-        case 'Enter':
-        case ' ':
+  if (chips.length) {
+    chips.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter || 'all';
+        setActiveChip(btn);
+        applyFilter(filter);
+      });
+      // Soporte teclado (por si en el futuro no es <button>)
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          activate(document.activeElement);
-          break;
-      }
+          btn.click();
+        }
+      });
     });
-  });
 
-  // Si el usuario cambia manualmente el hash (deep-linking)
-  window.addEventListener('hashchange', () => {
-    const f = getFilterFromURL();
-    if (!f) { activate(btns.find(b => (b.dataset.filter||'').toLowerCase()==='all') || btns[0], {focus:false}); return; }
-    const match = btns.find(b => (b.dataset.filter||'').toLowerCase() === f);
-    if (match) activate(match, {focus:false});
-  });
+    // Estado inicial (usa el chip con .is-active si existe)
+    const initial = document.querySelector('#proyectos .filters .chip.is-active');
+    const initialFilter = initial ? (initial.dataset.filter || 'all') : 'all';
+    if (initial) initial.setAttribute('aria-pressed', 'true');
+    applyFilter(initialFilter);
+  }
+
+  /* ===== Nav activo por sección visible ===== */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+  if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
+    const linkById = new Map(
+      [...navLinks].map(a => [a.getAttribute('href').slice(1), a])
+    );
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = linkById.get(id);
+        if (!link) return;
+
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.removeAttribute('aria-current'));
+          link.setAttribute('aria-current', 'page');
+        }
+      });
+    }, {
+      rootMargin: '-40% 0px -55% 0px', // zona dulce alrededor del centro
+      threshold: 0.01
+    });
+
+    sections.forEach(s => io.observe(s));
+  }
 })();

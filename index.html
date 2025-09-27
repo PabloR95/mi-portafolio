@@ -23,12 +23,12 @@
   <!-- Favicon / Icons -->
   <link rel="icon" href="assets/icons/code.png" type="image/png" sizes="32x32">
   <link rel="icon" href="assets/icons/code.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="assets/icons/code.png">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Portafolio — Pablo Ramírez">
   <meta property="og:description" content="Data Science y Desarrollo Web: Python, Pandas, React, Laravel.">
-  <meta property="og:image" content="https://pablor95.github.io/mi-portafolio/assets/images/og-preview.png">
+  <meta property="og:image" content="https://placehold.co/1200x630/png?text=Portafolio+Pablo+Ramirez">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pablor95.github.io/mi-portafolio/"/>
 
@@ -36,7 +36,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Portafolio — Pablo Ramírez">
   <meta name="twitter:description" content="Data Science y Desarrollo Web: Python, Pandas, React, Laravel.">
-  <meta name="twitter:image" content="https://pablor95.github.io/mi-portafolio/assets/images/og-preview.png">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/png?text=Portafolio+Pablo+Ramirez">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://pablor95.github.io/mi-portafolio/">
@@ -171,59 +171,71 @@
         </div>
 
         <div class="grid">
-          <article class="card" data-tags="web react">
-            <img src="assets/images/placeholder.webp" alt="Vista previa proyecto en React" loading="lazy" width="640" height="400"
-                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
+          <!-- Proyecto Web (React) -->
+          <article class="card" data-tags="web react" aria-labelledby="proj-react">
+            <img
+              src="https://placehold.co/640x400?text=Preview+React"
+              alt="Vista previa del Proyecto Web basado en React"
+              width="640" height="400" loading="lazy" decoding="async">
             <div class="card-body">
-              <h3>Proyecto Web</h3>
+              <h3 id="proj-react">Proyecto Web</h3>
               <p>Frontend con React.</p>
               <div class="card-actions">
-                <button class="btn-sm" type="button">Demo</button>
-                <button class="btn-sm btn-outline" type="button">Código</button>
+                <button class="btn-sm" type="button" aria-label="Ver demo del Proyecto Web (React)">Demo</button>
+                <button class="btn-sm btn-outline" type="button" aria-label="Ver código fuente del Proyecto Web (React)">Código</button>
               </div>
             </div>
           </article>
 
-          <article class="card" data-tags="dev docker">
-            <img src="assets/images/placeholder.webp" alt="Vista previa proyecto con Docker" loading="lazy" width="640" height="400"
-                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
+          <!-- Proyecto DevOps (Docker) -->
+          <article class="card" data-tags="dev docker" aria-labelledby="proj-devops">
+            <img
+              src="https://placehold.co/640x400?text=Preview+DevOps"
+              alt="Vista previa del Proyecto DevOps con Docker"
+              width="640" height="400" loading="lazy" decoding="async">
             <div class="card-body">
-              <h3>Proyecto DevOps</h3>
+              <h3 id="proj-devops">Proyecto DevOps</h3>
               <p>Contenerización con Docker.</p>
               <div class="card-actions">
-                <button class="btn-sm" type="button">Demo</button>
-                <button class="btn-sm btn-outline" type="button">Código</button>
+                <button class="btn-sm" type="button" aria-label="Ver demo del Proyecto DevOps (Docker)">Demo</button>
+                <button class="btn-sm btn-outline" type="button" aria-label="Ver código fuente del Proyecto DevOps (Docker)">Código</button>
               </div>
             </div>
           </article>
 
-          <article class="card" data-tags="cloud azure">
-            <img src="assets/images/placeholder.webp" alt="Vista previa proyecto en Azure" loading="lazy" width="640" height="400"
-                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
+          <!-- Proyecto en Azure (Cloud) -->
+          <article class="card" data-tags="cloud azure" aria-labelledby="proj-azure">
+            <img
+              src="https://placehold.co/640x400?text=Preview+Azure"
+              alt="Vista previa del Proyecto en Azure"
+              width="640" height="400" loading="lazy" decoding="async">
             <div class="card-body">
-              <h3>Proyecto en Azure</h3>
+              <h3 id="proj-azure">Proyecto en Azure</h3>
               <p>Despliegue de aplicaciones en la nube con Azure App Services.</p>
               <div class="card-actions">
-                <button class="btn-sm" type="button">Demo</button>
-                <button class="btn-sm btn-outline" type="button">Código</button>
+                <button class="btn-sm" type="button" aria-label="Ver demo del Proyecto en Azure">Demo</button>
+                <button class="btn-sm btn-outline" type="button" aria-label="Ver código fuente del Proyecto en Azure">Código</button>
               </div>
             </div>
           </article>
 
-          <article class="card" data-tags="ds ml sklearn">
-            <img src="assets/images/placeholder.webp" alt="Vista previa proyecto de Machine Learning" loading="lazy" width="640" height="400"
-                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
+          <!-- Proyecto de Machine Learning -->
+          <article class="card" data-tags="ds ml sklearn" aria-labelledby="proj-ml">
+            <img
+              src="https://placehold.co/640x400?text=Preview+ML"
+              alt="Vista previa del Proyecto de Machine Learning"
+              width="640" height="400" loading="lazy" decoding="async">
             <div class="card-body">
-              <h3>Proyecto Machine Learning</h3>
+              <h3 id="proj-ml">Proyecto Machine Learning</h3>
               <p>Modelo predictivo con Scikit-Learn y visualización de métricas.</p>
               <div class="card-actions">
-                <button class="btn-sm" type="button">Demo</button>
-                <button class="btn-sm btn-outline" type="button">Código</button>
+                <button class="btn-sm" type="button" aria-label="Ver demo del Proyecto de Machine Learning">Demo</button>
+                <button class="btn-sm btn-outline" type="button" aria-label="Ver código fuente del Proyecto de Machine Learning">Código</button>
               </div>
             </div>
           </article>
-        </div>
-      </div>
+        </div><!-- /.grid -->
+      </div><!-- /.container -->
     </section>
 
     <!-- =========================================================
@@ -233,15 +245,19 @@
       <div class="container">
         <h2>Datos en acción</h2>
         <div class="grid">
-          <article class="card">
-            <img src="assets/images/ventas_mes.webp" alt="Gráfico de ventas por mes" loading="lazy" width="640" height="360"
-                 onerror="this.onerror=null; this.src='https://placehold.co/640x360?text=Ventas';">
+          <article class="card" aria-labelledby="card-ventas">
+            <img
+              src="https://placehold.co/640x360?text=Ventas"
+              alt="Gráfico ilustrativo de ventas por mes"
+              width="640" height="360" loading="lazy" decoding="async">
             <div class="card-body">
-              <h3>Análisis de ventas</h3>
+              <h3 id="card-ventas">Análisis de ventas</h3>
               <p>Exploración de datos con Pandas y visualización con Matplotlib/Seaborn.</p>
               <div class="card-actions">
-                <a class="btn-sm" href="https://nbviewer.org/..." target="_blank" rel="noopener noreferrer">Notebook</a>
-                <a class="btn-sm btn-outline" href="https://github.com/..." target="_blank" rel="noopener noreferrer">Código</a>
+                <a class="btn-sm" href="#" target="_blank" rel="noopener noreferrer"
+                   aria-label="Abrir notebook del análisis de ventas">Notebook</a>
+                <a class="btn-sm btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                   aria-label="Abrir repositorio con el código del análisis de ventas">Código</a>
               </div>
             </div>
           </article>
