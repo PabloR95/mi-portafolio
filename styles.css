@@ -331,3 +331,5 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   filter: brightness(0) invert(1); /* blanco en modo oscuro */
   opacity: .9; transition: filter var(--t-fast);
 }
+
+.card img { aspect-ratio: 16 / 10; object-fit: cover; }
