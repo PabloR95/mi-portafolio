@@ -13,8 +13,8 @@
   <!-- ===== Estilos propios ===== -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- ===== Favicon ===== -->
-  <link rel="icon" href="images/code.png" />
+  <!-- ===== Favicon (opcional, quítalo si no tienes /images) ===== -->
+  <!-- <link rel="icon" href="images/code.png" /> -->
 
   <!-- ===== Open Graph ===== -->
   <meta property="og:title" content="Portafolio — Pablo Ramírez">
@@ -32,21 +32,17 @@
   <!-- ===== Color del navegador ===== -->
   <meta name="theme-color" content="#0f1220">
 
-  <!-- ===== JS de la UI (menú, filtros, tema…) ===== -->
+  <!-- ===== JS de la UI (filtros, tema, etc.) ===== -->
   <script defer src="script.js"></script>
 
-  <!-- ===== Ajustes básicos (sin fondo 3D) ===== -->
+  <!-- ===== Ajustes mínimos de seguridad visual si falta el CSS ===== -->
   <style>
-    /* Evita que el header sticky tape anclas (#hero, etc.) */
     html { scroll-padding-top: 80px; }
-
-    /* Fondo alterno para secciones */
-    .section.alt {
-      background: rgba(18,22,42,.85);
-    }
+    .section.alt { background: rgba(18,22,42,.85); }
   </style>
 </head>
 
+<body>
   <!-- =========================================================
        HEADER
   ========================================================== -->
@@ -59,11 +55,6 @@
       </strong>
     </a>
 
-    <!---<button class="menu-toggle"
-      aria-expanded="false"
-      aria-controls="nav"
-      aria-label="Abrir menú">☰</button>--Menu desplegable---> 
-
     <nav id="nav" class="nav" aria-label="Principal">
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proyectos">Proyectos</a>
@@ -71,17 +62,17 @@
     </nav>
   </header>
 
-
   <main>
     <!-- =========================================================
          HERO
     ========================================================== -->
     <section id="hero" class="hero">
-      <!--Fondo 3D--->
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>  
+      <!-- Fondo 3D (canvas pegado a la derecha; se controla vía CSS) -->
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
       <div class="container hero-grid">
         <div class="hero-copy">
-          <h1>Pablo <span> Ramírez</span></h1>
+          <h1>Pablo <span>Ramírez</span></h1>
           <p>Desarrollador web en formación. Construyo interfaces limpias y analizo datos.</p>
           <div class="cta">
             <a class="btn" href="#proyectos">Ver Proyectos</a>
@@ -132,7 +123,6 @@
       <div class="container">
         <h2>Proyectos</h2>
 
-        <!-- Filtros de proyectos -->
         <div class="filters" aria-label="Filtros de proyectos">
           <button class="chip is-active" data-filter="all" type="button">Todos</button>
           <button class="chip" data-filter="ds" type="button">Data Science</button>
@@ -141,14 +131,10 @@
           <button class="chip" data-filter="cloud" type="button">Cloud</button>
         </div>
 
-        <!-- Grid de proyectos -->
         <div class="grid">
-
-          <!-- Proyecto DS -->
+          <!-- Tarjetas de ejemplo (quítalas si no tienes /images) -->
           <article class="card" data-tags="ds python pandas">
-            <img src="images/placeholder.webp" 
-                 alt="Vista previa proyecto de análisis con Pandas" 
-                 loading="lazy" />
+            <img src="images/placeholder.webp" alt="Vista previa proyecto de análisis con Pandas" loading="lazy" />
             <div class="card-body">
               <h3>Proyecto Data Science</h3>
               <p>Análisis con Pandas y Matplotlib.</p>
@@ -159,11 +145,8 @@
             </div>
           </article>
 
-          <!-- Proyecto Web -->
           <article class="card" data-tags="web react">
-            <img src="images/placeholder.webp" 
-                 alt="Vista previa proyecto en React" 
-                 loading="lazy" />
+            <img src="images/placeholder.webp" alt="Vista previa proyecto en React" loading="lazy" />
             <div class="card-body">
               <h3>Proyecto Web</h3>
               <p>Frontend con React.</p>
@@ -174,11 +157,8 @@
             </div>
           </article>
 
-          <!-- Proyecto DevOps -->
           <article class="card" data-tags="dev docker">
-            <img src="images/placeholder.webp" 
-                 alt="Vista previa proyecto con Docker" 
-                 loading="lazy" />
+            <img src="images/placeholder.webp" alt="Vista previa proyecto con Docker" loading="lazy" />
             <div class="card-body">
               <h3>Proyecto DevOps</h3>
               <p>Contenerización con Docker.</p>
@@ -189,11 +169,8 @@
             </div>
           </article>
 
-          <!-- Proyecto Azure Cloud -->
           <article class="card" data-tags="cloud azure">
-            <img src="images/placeholder.webp" 
-                 alt="Vista previa proyecto en Azure" 
-                 loading="lazy" />
+            <img src="images/placeholder.webp" alt="Vista previa proyecto en Azure" loading="lazy" />
             <div class="card-body">
               <h3>Proyecto en Azure</h3>
               <p>Despliegue de aplicaciones en la nube con Azure App Services.</p>
@@ -204,11 +181,8 @@
             </div>
           </article>
 
-          <!-- Proyecto Machine Learning -->
           <article class="card" data-tags="ds ml sklearn">
-            <img src="images/placeholder.webp" 
-                 alt="Vista previa proyecto de Machine Learning" 
-                 loading="lazy" />
+            <img src="images/placeholder.webp" alt="Vista previa proyecto de Machine Learning" loading="lazy" />
             <div class="card-body">
               <h3>Proyecto Machine Learning</h3>
               <p>Modelo predictivo con Scikit-Learn y visualización de métricas.</p>
@@ -280,166 +254,161 @@
   </footer>
 
   <!-- ===== Three.js para el fondo 3D del HERO ===== -->
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script>
+    // ===== Ajustes (red blanca) =====
+    const SETTINGS = {
+      COUNT: window.innerWidth < 600 ? 120
+           : window.innerWidth < 1024 ? 250
+           : 400,
+      SPREAD: 700,
+      POINT_SIZE: 1.2,
+      LINK_DIST: 100,
+      LINK_OPACITY: 0.30,
+      POINT_COLOR: 0xffffff,
+      LINE_COLOR: 0xffffff,
+      ROTATION_SPEED_Y: 0.0008,
+      DAMP_ON_BLUR: true
+    };
 
-// ===== Ajustes (red blanca) =====
-const SETTINGS = {
-  COUNT: window.innerWidth < 600 ? 120      // móviles
-       : window.innerWidth < 1024 ? 250     // tablets / pantallas medianas
-       : 400,                               // escritorio
-  SPREAD: 700,                                 
-  POINT_SIZE: 1.2,
-  LINK_DIST: 100,                              
-  LINK_OPACITY: 0.30,
-  POINT_COLOR: 0xffffff,
-  LINE_COLOR: 0xffffff,
-  ROTATION_SPEED_Y: 0.0008,
-  DAMP_ON_BLUR: true
-};
+    // ===== Escena =====
+    const hero   = document.getElementById('hero');
+    const canvas = document.getElementById('hero-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
 
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 1, 2000);
+    camera.position.z = 300;
 
-  // ===== Escena =====
-  const hero   = document.getElementById('hero');
-  const canvas = document.getElementById('hero-canvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0); // canvas transparente
+    // ===== Puntos =====
+    const positions = new Float32Array(SETTINGS.COUNT * 3);
+    for (let i = 0; i < positions.length; i += 3) {
+      positions[i]   = (Math.random() - 0.5) * SETTINGS.SPREAD;
+      positions[i+1] = (Math.random() - 0.5) * SETTINGS.SPREAD;
+      positions[i+2] = (Math.random() - 0.5) * SETTINGS.SPREAD;
+    }
+    const pointsGeom = new THREE.BufferGeometry();
+    pointsGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const pointsMat = new THREE.PointsMaterial({
+      size: SETTINGS.POINT_SIZE,
+      color: SETTINGS.POINT_COLOR,
+      transparent: true,
+      opacity: 0.95
+    });
+    const points = new THREE.Points(pointsGeom, pointsMat);
+    scene.add(points);
 
-  const scene  = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, 1, 1, 2000);
-  camera.position.z = 300;
+    // ===== Líneas cercanas (plexus) =====
+    const maxConnections = 4;
+    const linkDistSq = SETTINGS.LINK_DIST * SETTINGS.LINK_DIST;
+    const lineIndices = [];
+    const stride = window.innerWidth < 768 ? 3 : 2;
 
-  // ===== Puntos =====
-  const positions = new Float32Array(SETTINGS.COUNT * 3);
-  for (let i = 0; i < positions.length; i += 3) {
-    positions[i]   = (Math.random() - 0.5) * SETTINGS.SPREAD;
-    positions[i+1] = (Math.random() - 0.5) * SETTINGS.SPREAD;
-    positions[i+2] = (Math.random() - 0.5) * SETTINGS.SPREAD;
-  }
-  const pointsGeom = new THREE.BufferGeometry();
-  pointsGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const pointsMat = new THREE.PointsMaterial({
-    size: SETTINGS.POINT_SIZE,
-    color: SETTINGS.POINT_COLOR,
-    transparent: true,
-    opacity: 0.95
-  });
-  const points = new THREE.Points(pointsGeom, pointsMat);
-  scene.add(points);
+    function rebuildLinks() {
+      lineIndices.length = 0;
+      const pos = pointsGeom.attributes.position.array;
+      const n = SETTINGS.COUNT;
 
-  // ===== Líneas cercanas (plexus) =====
-  const maxConnections = 4;
-  const linkDistSq = SETTINGS.LINK_DIST * SETTINGS.LINK_DIST;
-  const lineIndices = [];
-  const stride = window.innerWidth < 768 ? 3 : 2; // menos comparaciones en móvil
+      for (let i = 0; i < n; i += stride) {
+        let connections = 0;
+        const ia = i * 3;
+        const ax = pos[ia], ay = pos[ia+1], az = pos[ia+2];
 
-  function rebuildLinks() {
-    lineIndices.length = 0;
-    const pos = pointsGeom.attributes.position.array;
-    const n = SETTINGS.COUNT;
+        for (let j = i + 1; j < n; j += stride) {
+          if (connections >= maxConnections) break;
+          const jb = j * 3;
+          const bx = pos[jb], by = pos[jb+1], bz = pos[jb+2];
 
-    for (let i = 0; i < n; i += stride) {
-      let connections = 0;
-      const ia = i * 3;
-      const ax = pos[ia], ay = pos[ia+1], az = pos[ia+2];
-
-      for (let j = i + 1; j < n; j += stride) {
-        if (connections >= maxConnections) break;
-        const jb = j * 3;
-        const bx = pos[jb], by = pos[jb+1], bz = pos[jb+2];
-
-        const dx = ax - bx, dy = ay - by, dz = az - bz;
-        if ((dx*dx + dy*dy + dz*dz) <= linkDistSq) {
-          lineIndices.push(i, j);
-          connections++;
+          const dx = ax - bx, dy = ay - by, dz = az - bz;
+          if ((dx*dx + dy*dy + dz*dz) <= linkDistSq) {
+            lineIndices.push(i, j);
+            connections++;
+          }
         }
       }
     }
-  }
-  rebuildLinks();
+    rebuildLinks();
 
-  function createLineSegments() {
-    const pos = pointsGeom.attributes.position.array;
-    const linePositions = new Float32Array(lineIndices.length * 3);
-    let p = 0;
-    for (let k = 0; k < lineIndices.length; k += 2) {
-      const a = lineIndices[k] * 3;
-      const b = lineIndices[k+1] * 3;
+    function createLineSegments() {
+      const pos = pointsGeom.attributes.position.array;
+      const linePositions = new Float32Array(lineIndices.length * 3);
+      let p = 0;
+      for (let k = 0; k < lineIndices.length; k += 2) {
+        const a = lineIndices[k] * 3;
+        const b = lineIndices[k + 1] * 3;
 
-      linePositions[p++] = pos[a];
-      linePositions[p++] = pos[a+1];
-      linePositions[p++] = pos[a+2];
+        linePositions[p++] = pos[a];
+        linePositions[p++] = pos[a + 1];
+        linePositions[p++] = pos[a + 2];
 
-      linePositions[p++] = pos[b];
-      linePositions[p++] = pos[b+1];
-      linePositions[p++] = pos[b+2];
+        linePositions[p++] = pos[b];
+        linePositions[p++] = pos[b + 1];
+        linePositions[p++] = pos[b + 2];
+      }
+      const geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+      const mat = new THREE.LineBasicMaterial({
+        color: SETTINGS.LINE_COLOR,
+        transparent: true,
+        opacity: SETTINGS.LINK_OPACITY
+      });
+      return new THREE.LineSegments(geom, mat);
     }
-    const geom = new THREE.BufferGeometry();
-    geom.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    const mat = new THREE.LineBasicMaterial({
-      color: SETTINGS.LINE_COLOR,
-      transparent: true,
-      opacity: SETTINGS.LINK_OPACITY
-    });
-    return new THREE.LineSegments(geom, mat);
-  }
 
-  let lines = createLineSegments();
-  scene.add(lines);
+    let lines = createLineSegments();
+    scene.add(lines);
 
-  // ===== Resize al tamaño del hero =====
-  function sizeToHero(){
-    const r = hero.getBoundingClientRect();
-    const w = Math.max(1, r.width);
-    const h = Math.max(1, r.height);
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  sizeToHero();
-  window.addEventListener('resize', sizeToHero);
+    // ===== Resize al tamaño del hero =====
+    function sizeToHero() {
+      const r = hero.getBoundingClientRect();
+      const w = Math.max(1, r.width);
+      const h = Math.max(1, r.height);
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    sizeToHero();
+    window.addEventListener('resize', sizeToHero);
 
-  // ===== Loop =====
-  let running = true, rafId = null;
-  function animate(){
-    if (!running) return;
-    rafId = requestAnimationFrame(animate);
-    points.rotation.y += SETTINGS.ROTATION_SPEED_Y;
-    lines.rotation.y  += SETTINGS.ROTATION_SPEED_Y;
-    renderer.render(scene, camera);
-  }
+    // ===== Loop =====
+    let running = true, rafId = null;
+    function animate() {
+      if (!running) return;
+      rafId = requestAnimationFrame(animate);
+      points.rotation.y += SETTINGS.ROTATION_SPEED_Y;
+      lines.rotation.y  += SETTINGS.ROTATION_SPEED_Y;
+      renderer.render(scene, camera);
+    }
+    animate();
 
- // Pausa cuando el hero no es visible
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.target === hero) {
-      if (e.isIntersecting) {
+    // Pausa/reanuda según visibilidad del hero
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.target === hero) {
+          if (e.isIntersecting) {
+            running = true;
+            if (!rafId) animate();
+          } else {
+            running = false;
+            rafId = null;
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+    io.observe(hero);
+
+    // Pausa al cambiar de pestaña y reanuda al volver
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
         running = true;
-        if (!rafId) animate(); // ✅ reanuda si estaba detenido
+        if (!rafId) animate();
       } else {
         running = false;
-        rafId = null; // libera el id para poder reiniciar
+        rafId = null;
       }
-    }
-  });
-}, { threshold: 0.1 });
-io.observe(hero);
-
-// Pausa al cambiar de pestaña
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    running = true;
-    if (!rafId) animate(); // ✅ reanuda al volver a la pestaña
-  } else {
-    running = false;
-    rafId = null;
-  }
-});
-
-
-</script>
+    });
+  </script>
 </body>
 </html>
-
-
