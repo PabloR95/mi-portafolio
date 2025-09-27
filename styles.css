@@ -381,3 +381,30 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   filter: none; /* en modo claro muestra el logo en su color original */
 }
 
+/* === Tema oscuro === */
+body {
+  background-color: #0d1117; /* fondo principal oscuro */
+  color: #e6edf3; /* texto claro */
+}
+
+nav {
+  background-color: #0d1117;
+}
+
+section {
+  background-color: #161b22; /* secciones un poco más claras */
+}
+
+footer {
+  background-color: #0d1117;
+}
+
+button, .btn {
+  background-color: #21262d;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+}
+
+button:hover, .btn:hover {
+  background-color: #30363d;
+}
