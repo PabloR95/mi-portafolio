@@ -360,17 +360,18 @@
     let lines = createLineSegments();
     scene.add(lines);
 
-    // ===== Resize al tamaño del hero =====
-    function sizeToHero() {
-      const r = hero.getBoundingClientRect();
-      const w = Math.max(1, r.width);
-      const h = Math.max(1, r.height);
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-    sizeToHero();
-    window.addEventListener('resize', sizeToHero);
+   // ===== Resize al tamaño del canvas =====
+function sizeToCanvas(){
+  const r = canvas.getBoundingClientRect();  // medimos solo el canvas
+  const w = Math.max(1, r.width);
+  const h = Math.max(1, r.height);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+sizeToCanvas();
+window.addEventListener('resize', sizeToCanvas);
+
 
     // ===== Loop =====
     let running = true, rafId = null;
