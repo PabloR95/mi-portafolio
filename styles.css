@@ -2,14 +2,17 @@
    Tokens / Reset
 ========================================================= */
 :root{
-  --bg:#0b0f1d;
-  --bg-alt:#11162c;
-  --text:#e7e9f5;
+  /* Forzamos modo oscuro consistente */
+  color-scheme: dark;
+
+  --bg:#0b1020;
+  --bg-alt:#141a2a;
+  --text:#e8ecf4;
   --muted:#a6accd;
   --brand:#6a8cff;
   --accent:#9ef0ff;
   --card:#171b2e;
-  --border:#2a3153;
+  --border:#1b2237;
 
   --radius:16px;
   --container:1100px;
@@ -61,7 +64,7 @@ a{ color:inherit; text-decoration:none; }
    Layout
 ========================================================= */
 .container{ width:min(var(--container), calc(100% - 32px)); margin-inline:auto; }
-.section{ padding:64px 0; }
+.section{ padding:64px 0; background:var(--bg); }
 .section.alt{ background:var(--bg-alt); }
 h1,h2,h3{ line-height:1.2; margin:0 0 12px; }
 h1{ font-size:clamp(2rem, 5vw, 3rem); }
@@ -71,12 +74,20 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
    Header / Nav
 ========================================================= */
 .site-header{
-  position:sticky; top:0; z-index:10;
-  backdrop-filter:blur(6px);
-  background:rgba(15,18,32,.65);
+  position:sticky; top:0; z-index:1000;
+  /* Fallback sólido para todos */
+  background:var(--bg);
   border-bottom:1px solid var(--border);
   display:flex; align-items:center; justify-content:space-between;
   padding:12px 16px;
+}
+/* Blur y saturación solo donde haya soporte */
+@supports (backdrop-filter: blur(6px)) {
+  .site-header{
+    background:rgba(11,16,32,.85);
+    -webkit-backdrop-filter:saturate(160%) blur(6px);
+    backdrop-filter:saturate(160%) blur(6px);
+  }
 }
 
 .brand{
@@ -90,6 +101,7 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   color:#ffffff !important;
   padding:2px 6px; border-radius:8px;
   transition:color var(--t-base), text-shadow .3s ease, background var(--t-base);
+  background:transparent !important;
 }
 .nav a:hover{
   color:var(--brand);
@@ -147,9 +159,6 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
 .badge i{ width:8px; height:8px; border-radius:999px; background:var(--accent); opacity:.9; }
 .badge.azure{ border-color:#2563eb50; background:#1e3a8a55; color:#dde7ff; }
 .badge.docker{ border-color:#22a6f255; background:#0b395755; color:#d6f0ff; }
-.light .badge{ color:#0f1320; }
-.light .badge.azure{ background:#e9f0ff; border-color:#c8d9ff; }
-.light .badge.docker{ background:#e8f8ff; border-color:#bfeaff; }
 
 /* =========================================================
    Stack
@@ -172,11 +181,6 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
 .stack li[data-cat="web"]{ background:#112d28; border-color:#1c5d50; color:#c8fff1; }
 .stack li[data-cat="dev"]{ background:#2a250f; border-color:#6a5a25; color:#ffe9b3; }
 .stack li[data-cat="cloud"]{ background:#0e2333; border-color:#1f5673; color:#cfeeff; }
-
-.light .stack li[data-cat="ds"]{ background:#e9edff; border-color:#c3ccff; color:#0f1320; }
-.light .stack li[data-cat="web"]{ background:#e7fff7; border-color:#b7ffea; color:#0f1320; }
-.light .stack li[data-cat="dev"]{ background:#fff6d9; border-color:#ffe7a6; color:#0f1320; }
-.light .stack li[data-cat="cloud"]{ background:#e6f6ff; border-color:#bde7ff; color:#0f1320; }
 
 /* Compacta el salto hacia “Stack” */
 #sobre-mi.section{ padding-bottom:40px; }
@@ -258,35 +262,12 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
 ========================================================= */
 .site-footer{ border-top:1px solid var(--border); padding:24px 0; color:var(--muted); }
 
-/* =========================================================
-   Light theme (clase .light en <html>)
-========================================================= */
-.light{
-  --bg:#f7f8ff;
-  --bg-alt:#eef1ff;
-  --text:#0f1320;
-  --muted:#47507a;
-  --brand:#425cff;
-  --accent:#2563eb;
-  --card:#ffffff;
-  --border:#d6dcff;
-}
-.light .site-header{ background:rgba(255,255,255,.7); }
-.light .nav a{ color:#0f1320 !important; }
-.light .nav a[aria-current="page"]{
-  background:rgba(66,92,255,.15);
-  box-shadow:inset 0 0 0 1px rgba(66,92,255,.35);
-}
-
 /* ===== Contacto 2 columnas ===== */
-.contact-grid{
-  gap: var(--grid-gap);
-}
-
+.contact-grid{ gap: var(--grid-gap); }
 /* Dos columnas en desktop, una en móvil/tablet */
 @media (min-width: 1024px){
   .contact-grid{
-    grid-template-columns: 1.1fr .9fr;  /* form un poco más ancho */
+    grid-template-columns: 1.1fr .9fr;
     align-items: stretch;
   }
 }
@@ -298,17 +279,14 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   gap: var(--space-3);
 }
 
-.contact-lead{
-  color: var(--muted);
-  margin: 2px 0 4px;
-}
+.contact-lead{ color: var(--muted); margin: 2px 0 4px; }
 
 .contact-list{
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: .4rem;
+  gap: .6rem;
   color: var(--text);
   opacity: .95;
 }
@@ -327,15 +305,8 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   opacity: .7;
 }
 
-.contact-extra summary{
-  cursor: pointer;
-  font-weight: 700;
-  padding: .25rem 0;
-}
-.contact-extra ul{
-  margin: .5rem 0 0;
-  padding-left: 1.1rem;
-}
+.contact-extra summary{ cursor: pointer; font-weight: 700; padding: .25rem 0; }
+.contact-extra ul{ margin: .5rem 0 0; padding-left: 1.1rem; }
 .contact-extra li{ margin: .15rem 0; }
 
 /* Botones en la tarjeta de contacto: sutil hover */
@@ -345,14 +316,6 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
 }
 
 /* ===== Contact links con icono ===== */
-.contact-list{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: .6rem;
-}
-
 .contact-link{
   display: flex;
   align-items: center;
@@ -362,80 +325,9 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   text-decoration: none;
   transition: color var(--t-base), transform var(--t-fast);
 }
-
-.contact-link:hover{
-  color: var(--brand);
-  transform: translateX(2px);
-}
-
+.contact-link:hover{ color: var(--brand); transform: translateX(2px); }
 .contact-link .icon{
-  width: 20px;
-  height: 20px;
-  display: inline-block;
+  width: 20px; height: 20px; display: inline-block;
   filter: brightness(0) invert(1); /* blanco en modo oscuro */
-  opacity: .9;
-  transition: filter var(--t-fast);
+  opacity: .9; transition: filter var(--t-fast);
 }
-
-.light .contact-link .icon{
-  filter: none; /* en modo claro muestra el logo en su color original */
-}
-
-
-
-/* Forzamos dark en navegadores / motores */
-:root {
-  color-scheme: dark;
-
-  /* Si quieres igualar tonos exactos:
-     puedes ajustar aquí los tokens base y el resto
-     del archivo seguirá obedeciendo */
-  --bg: #0b1020;
-  --bg-alt: #141a2a;
-  --text: #e8ecf4;
-  --border: #1b2237;
-  /* Mantengo tu --brand y demás del bloque inicial */
-}
-
-/* Fondo y texto global según tokens */
-html, body {
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* Secciones coherentes con tokens */
-.section { background: var(--bg); }
-.section.alt { background: var(--bg-alt); }
-
-/* Header: fallback sólido + blur si hay soporte */
-.site-header{
-  position: sticky; top: 0; z-index: 1000;
-  background: var(--bg);                /* fallback sin blur */
-  border-bottom: 1px solid var(--border);
-}
-@supports (backdrop-filter: blur(8px)) {
-  .site-header{
-    background: rgba(11,16,32,.85);
-    -webkit-backdrop-filter: saturate(160%) blur(8px);
-    backdrop-filter: saturate(160%) blur(8px);
-  }
-}
-
-/* Nav: texto claro y sin fondos accidentales */
-.nav a{
-  color: var(--text) !important;
-  background: transparent !important;
-  padding: .25rem .5rem;
-  border-radius: .375rem;
-  text-decoration: none;
-}
-.nav a:hover{ color:#cddcff; }
-
-/* Anclas con header fijo + scroll suave */
-html { scroll-behavior: smooth; }
-section { scroll-margin-top: 96px; }
-
-/* Botones/chips en oscuro */
-.btn{ background:#2c48f0; color:#fff; border:1px solid #2a3bb7; }
-.btn.outline, .btn-sm.btn-outline{ background:transparent; color:var(--text); border:1px solid #2a3557; }
-.chip{ background:#1a2239; color:#d7def0; border:1px solid #2a3557; }
