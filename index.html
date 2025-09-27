@@ -46,7 +46,15 @@
 
   <!-- CSS fallback mínimo -->
   <style>
-    html { scroll-padding-top: 80px; }
+    /* ✅ Scroll suave y corrección de anclas con header fijo */
+    html { 
+      scroll-padding-top: 80px;
+      scroll-behavior: smooth;
+    }
+    section {
+      scroll-margin-top: 96px; /* ajusta según la altura real del header */
+    }
+
     .section.alt { background: rgba(18,22,42,.85); }
     #hero-canvas{ position:absolute; top:0; right:0; width:60%; height:100%; pointer-events:none; display:block; z-index:0; }
     .hero{ position:relative; overflow:hidden; }
@@ -304,7 +312,8 @@
               <hr class="contact-sep" aria-hidden="true">
 
               <div class="contact-actions">
-                <a class="btn-sm btn-outline" href="/cv.pdf" target="_blank" rel="noopener noreferrer">Certificados</a>
+                <!-- ✅ ruta relativa para GitHub Pages -->
+                <a class="btn-sm btn-outline" href="cv.pdf" target="_blank" rel="noopener noreferrer">Certificados</a>
               </div>
             </div>
           </article>
