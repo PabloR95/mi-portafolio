@@ -1,41 +1,87 @@
-// Año dinámico en el footer
-document.getElementById('year').textContent = new Date().getFullYear();
+/* =========================================================
+   Utils
+========================================================= */
+const $  = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
-// Menú móvil
-const toggle = document.querySelector('.menu-toggle');
-const nav = document.getElementById('nav');
+/* Año dinámico */
+const yearEl = $('#year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-toggle.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('show');
-  toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+// /* =========================================================
+//    Menú móvil (hamburguesa)
+// ========================================================= */
+// const toggle = $('.menu-toggle');
+// const nav = $('#nav');
+
+// if (toggle && nav){
+//   toggle.addEventListener('click', () => {
+//     const open = nav.classList.toggle('show');
+//     toggle.setAttribute('aria-expanded', String(open));
+//   });
+
+//   // cerrar al hacer click fuera
+//   document.addEventListener('click', (e) => {
+//     if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('show')){
+//       nav.classList.remove('show');
+//       toggle.setAttribute('aria-expanded','false');
+//     }
+//   });
+// }
+
+/* =========================================================
+   Tema claro/oscuro
+========================================================= */
+const root = document.documentElement;
+const themeBtn = $('#themeToggle');
+
+const systemPref = () =>
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+const applyTheme = (mode) => {
+  const isLight = mode === 'light';
+  root.classList.toggle('light', isLight);
+  themeBtn?.setAttribute('aria-pressed', String(isLight));
+};
+
+const saved = localStorage.getItem('theme');
+applyTheme(saved || systemPref());
+
+themeBtn?.addEventListener('click', () => {
+  const isLight = root.classList.toggle('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  themeBtn.setAttribute('aria-pressed', String(isLight));
 });
 
-// Tema oscuro/claro (simple: invierte variables con una clase)
-const themeBtn = document.getElementById('themeToggle');
-themeBtn.addEventListener('click', () => {
-  document.documentElement.classList.toggle('light');
-});
+/* =========================================================
+   Filtros de proyectos (usa data-tags en cada .card)
+========================================================= */
+const projectsSection = $('#proyectos');
+if (projectsSection){
+  const btns = $$('.filters .chip', projectsSection);
+  const grid = $('.grid', projectsSection);
 
-// Si quieres un tema claro, define overrides:
-const style = document.createElement('style');
-style.textContent = `
-  .light{
-    --bg:#f6f7fb; --bg-alt:#eef0f7; --text:#11131b; --muted:#3f4665;
-    --brand:#3b63ff; --card:#ffffff; --border:#d8dcf0;
-  }
-`;
-document.head.appendChild(style);
+  const applyFilter = (tag) => {
+    $$('.card', grid).forEach(card => {
+      const tags = (card.dataset.tags || '').toLowerCase();
+      const show = tag === 'all' || tags.includes(tag);
+      card.style.display = show ? '' : 'none';
+      card.setAttribute('aria-hidden', show ? 'false' : 'true');
+    });
+  };
 
-// Scroll suave (mejora UX)
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', e=>{
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if(el){
-      e.preventDefault();
-      el.scrollIntoView({behavior:'smooth', block:'start'});
-      nav.classList.remove('show'); // cierra menú en móvil
-      toggle.setAttribute('aria-expanded','false');
-    }
-  });
-});
+  const activate = (btn) => {
+    btns.forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    applyFilter((btn.dataset.filter || 'all').toLowerCase());
+  };
+
+  // estado inicial
+  const initial = btns.find(b => (b.dataset.filter || '') === 'all') || btns[0];
+  if (initial) activate(initial);
+
+  // clicks
+  btns.forEach(b => b.addEventListener('click', () => activate(b)));
+}
+
+
