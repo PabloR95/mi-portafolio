@@ -283,18 +283,21 @@
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script>
 
-  // ===== Ajustes (red blanca) =====
-  const SETTINGS = {
-    COUNT: window.innerWidth < 768 ? 500 : 1200,
-    SPREAD: 800,
-    POINT_SIZE: 2,
-    LINK_DIST: 90,
-    LINK_OPACITY: 0.35,
-    POINT_COLOR: 0xffffff,   // blanco
-    LINE_COLOR: 0xffffff,    // blanco
-    ROTATION_SPEED_Y: 0.0009,
-    DAMP_ON_BLUR: true
-  };
+// ===== Ajustes (red blanca) =====
+const SETTINGS = {
+  COUNT: window.innerWidth < 600 ? 120      // móviles
+       : window.innerWidth < 1024 ? 250     // tablets / pantallas medianas
+       : 400,                               // escritorio
+  SPREAD: 700,                                 
+  POINT_SIZE: 1.2,
+  LINK_DIST: 100,                              
+  LINK_OPACITY: 0.30,
+  POINT_COLOR: 0xffffff,
+  LINE_COLOR: 0xffffff,
+  ROTATION_SPEED_Y: 0.0008,
+  DAMP_ON_BLUR: true
+};
+
 
   // ===== Escena =====
   const hero   = document.getElementById('hero');
@@ -406,7 +409,33 @@
     lines.rotation.y  += SETTINGS.ROTATION_SPEED_Y;
     renderer.render(scene, camera);
   }
-  animate();
+
+ // Pausa cuando el hero no es visible
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.target === hero) {
+      if (e.isIntersecting) {
+        running = true;
+        if (!rafId) animate(); // ✅ reanuda si estaba detenido
+      } else {
+        running = false;
+        rafId = null; // libera el id para poder reiniciar
+      }
+    }
+  });
+}, { threshold: 0.1 });
+io.observe(hero);
+
+// Pausa al cambiar de pestaña
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    running = true;
+    if (!rafId) animate(); // ✅ reanuda al volver a la pestaña
+  } else {
+    running = false;
+    rafId = null;
+  }
+});
 
 
 </script>

@@ -95,32 +95,35 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
 /* =========================================================
    Hero (overlay oscuro como tu 2ª captura)
 ========================================================= */
+/* HERO más bajo */
 .hero{
   position:relative;
-  padding:92px 0 72px;
+  min-height:45vh;     
+  padding:40px 0 28px;  
   border-bottom:1px solid var(--border);
+  overflow:hidden;
 }
-.hero .container{ position:relative; z-index:1; } /* texto encima */
-.hero::before{
-  content:"";
-  position:absolute; inset:-120px 0 0 0;
-  pointer-events:none; z-index:0;
-  background:
-    radial-gradient(900px 360px at 0% 0%,
-      rgba(10,12,24,.88) 0%, rgba(10,12,24,.75) 35%, transparent 60%),
-    radial-gradient(900px 360px at 100% 0%,
-      rgba(55,0,90,.42) 0%, rgba(55,0,90,.28) 30%, transparent 55%);
-}
-.hero-grid{ display:grid; grid-template-columns:1.2fr 1fr; align-items:center; gap:24px; }
-.hero h1 span{ color:var(--brand); }
-.cta{ margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; }
 
-/* En modo claro suavizamos el overlay (no lo “ensucia”) */
-.light .hero::before{
-  background:
-    radial-gradient(900px 360px at 0% 0%, rgba(0,0,0,.10), transparent 60%),
-    radial-gradient(900px 360px at 100% 0%, rgba(55,0,90,.08), transparent 55%);
+/* el overlay no “crezca” fuera del hero */
+.hero::before{ inset:0; z-index:1; }
+
+/* Canvas solo en la parte derecha */
+#hero-canvas{ 
+  position:absolute; 
+  top:0; 
+  right:0;             /* pegado a la derecha */
+  width:60%;           /* ocupa solo el lado derecho */
+  height:100%; 
+  z-index:0; 
+  pointer-events:none; 
+  display:block;
 }
+
+.hero .container{ 
+  position:relative; 
+  z-index:2; 
+}
+
 
 /* =========================================================
    About: texto y badges (opcionales)
@@ -314,11 +317,4 @@ h2{ font-size:clamp(1.4rem, 3vw, 2rem); }
   padding-bottom: 32px;
 }
 
-/* ===== HERO + CANVAS 3D ===== */
-.hero{ position:relative; min-height:88vh; overflow:hidden; }
-#hero-canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:block; }
-.hero::before{ z-index:1; }      /* overlay encima del canvas */
-.hero .container{ position:relative; z-index:2; } /* texto encima */
-.site-header{ z-index:20; }
-@media (max-width:720px){ .hero{ min-height:72vh; } }
-@media (prefers-reduced-motion: reduce){ #hero-canvas{ opacity:.25; } }
+

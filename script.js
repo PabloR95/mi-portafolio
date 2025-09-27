@@ -85,3 +85,21 @@ if (projectsSection){
 }
 
 
+// Selecciona el canvas del hero
+const canvas = document.getElementById("hero-canvas");
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+
+// Usa el tamaño real del canvas (no toda la ventana)
+renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+// Cámara ajustada al tamaño del canvas
+camera.aspect = canvas.clientWidth / canvas.clientHeight;
+camera.updateProjectionMatrix();
+
+// Ajusta también en el resize
+window.addEventListener("resize", () => {
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+  camera.updateProjectionMatrix();
+});
