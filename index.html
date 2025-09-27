@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- CSS (preload + única hoja) -->
+  <!-- CSS -->
   <link rel="preload" href="styles.css" as="style">
   <link rel="stylesheet" href="styles.css">
 
@@ -98,7 +98,6 @@
          HERO
     ========================================================== -->
     <section id="hero" class="hero">
-      <!-- Fondo 3D (canvas pegado a la derecha; se controla vía CSS) -->
       <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
       <div class="container hero-grid">
@@ -163,9 +162,9 @@
         </div>
 
         <div class="grid">
-          <!-- Ajustar a lo real) -->
           <article class="card" data-tags="web react">
-            <img src="images/placeholder.webp" alt="Vista previa proyecto en React" loading="lazy" width="640" height="400">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto en React" loading="lazy" width="640" height="400"
+                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
             <div class="card-body">
               <h3>Proyecto Web</h3>
               <p>Frontend con React.</p>
@@ -177,7 +176,8 @@
           </article>
 
           <article class="card" data-tags="dev docker">
-            <img src="images/placeholder.webp" alt="Vista previa proyecto con Docker" loading="lazy" width="640" height="400">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto con Docker" loading="lazy" width="640" height="400"
+                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
             <div class="card-body">
               <h3>Proyecto DevOps</h3>
               <p>Contenerización con Docker.</p>
@@ -189,7 +189,8 @@
           </article>
 
           <article class="card" data-tags="cloud azure">
-            <img src="images/placeholder.webp" alt="Vista previa proyecto en Azure" loading="lazy" width="640" height="400">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto en Azure" loading="lazy" width="640" height="400"
+                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
             <div class="card-body">
               <h3>Proyecto en Azure</h3>
               <p>Despliegue de aplicaciones en la nube con Azure App Services.</p>
@@ -201,7 +202,8 @@
           </article>
 
           <article class="card" data-tags="ds ml sklearn">
-            <img src="images/placeholder.webp" alt="Vista previa proyecto de Machine Learning" loading="lazy" width="640" height="400">
+            <img src="images/placeholder.webp" alt="Vista previa proyecto de Machine Learning" loading="lazy" width="640" height="400"
+                 onerror="this.onerror=null; this.src='https://placehold.co/640x400?text=Preview';">
             <div class="card-body">
               <h3>Proyecto Machine Learning</h3>
               <p>Modelo predictivo con Scikit-Learn y visualización de métricas.</p>
@@ -223,7 +225,8 @@
         <h2>Datos en acción</h2>
         <div class="grid">
           <article class="card">
-            <img src="images/ventas_mes.webp" alt="Gráfico de ventas por mes" loading="lazy" width="640" height="360">
+            <img src="images/ventas_mes.webp" alt="Gráfico de ventas por mes" loading="lazy" width="640" height="360"
+                 onerror="this.onerror=null; this.src='https://placehold.co/640x360?text=Ventas';">
             <div class="card-body">
               <h3>Análisis de ventas</h3>
               <p>Exploración de datos con Pandas y visualización con Matplotlib/Seaborn.</p>
@@ -236,74 +239,79 @@
         </div>
       </div>
     </section>
+
     <!-- =========================================================
-     CONTACTO 
-========================================================== -->
-<section id="contacto" class="section">
-  <div class="container">
-    <h2>Contacto</h2>
+         CONTACTO (2 columnas)
+    ========================================================== -->
+    <section id="contacto" class="section">
+      <div class="container">
+        <h2>Contacto</h2>
 
-    <div class="grid contact-grid">
-      <!-- Columna izquierda: Formulario -->
-      <article class="card">
-        <div class="card-body">
-          <form class="form" name="contacto" method="POST" accept-charset="utf-8"
-                data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="on">
-            <input type="hidden" name="form-name" value="contacto" />
-            <p hidden>
-              <label>No completar: <input name="bot-field" /></label>
-            </p>
+        <div class="grid contact-grid">
+          <!-- Columna izquierda: Formulario -->
+          <article class="card">
+            <div class="card-body">
+              <form class="form" name="contacto" method="POST" accept-charset="utf-8"
+                    data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="on">
+                <input type="hidden" name="form-name" value="contacto" />
+                <p hidden>
+                  <label>No completar: <input name="bot-field" /></label>
+                </p>
 
-            <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" name="nombre" required autocomplete="name" />
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" name="nombre" required autocomplete="name" />
 
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" required autocomplete="email" inputmode="email" />
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" required autocomplete="email" inputmode="email" />
 
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
 
-            <button class="btn" type="submit">Enviar</button>
-          </form>
-        </div>
-      </article>
+                <button class="btn" type="submit">Enviar</button>
+              </form>
+            </div>
+          </article>
 
-      <!-- Columna derecha: Info  -->
-     
-<article class="card contact-card">
-  <div class="card-body">
-    <h3>Bienvenid@</h3>
-    <p class="contact-lead">
-    ¿Tienes una idea o un proyecto? Me puedes escribir por mis redes.
-    </p>
+          <!-- Columna derecha: Info / redes con iconos -->
+          <article class="card contact-card">
+            <div class="card-body">
+              <h3>Bienvenid@</h3>
+              <p class="contact-lead">
+                ¿Tienes una idea o un proyecto? Escríbeme...
+              </p>
 
-    <ul class="contact-list" role="list">
-      <li>
-        <a href="mailto:pablo@example.com" class="contact-link" aria-label="Correo">
-          <img src="images/mail.svg" alt="" class="icon" />
-          <span>pablo.ramirezdata@gmail.com</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/tuusuario" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
-          <img src="images/github.svg" alt="" class="icon" />
-          <span>GitHub</span>
-        </a>
-      </li>
-      <li>
-        <!-- <a href="https://www.linkedin.com/in/tuusuario" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="LinkedIn">
-          <img src="images/icons/linkedin.svg" alt="" class="icon" />
-          <span>LinkedIn</span> -->
-        </a>
-      </li>
-    </ul>
-    <hr class="contact-sep" aria-hidden="true">
-    <div class="contact-actions">
-      <a class="btn-sm btn-outline" href="/cv.pdf" target="_blank" rel="noopener noreferrer">Certificados</a>
-    </div>
-  </div>
-</article>
+              <ul class="contact-list" role="list">
+                <li>
+                  <a href="mailto:pablo.ramirezdata@gmail.com" class="contact-link" aria-label="Correo">
+                    <img src="images/mail.svg" alt="" class="icon" />
+                    <span>pablo.ramirezdata@gmail.com</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/tuusuario" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
+                    <img src="images/github.svg" alt="" class="icon" />
+                    <span>GitHub</span>
+                  </a>
+                </li>
+                <!-- <li>
+                  <a href="https://www.linkedin.com/in/tuusuario" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="LinkedIn">
+                    <img src="images/linkedin.svg" alt="" class="icon" />
+                    <span>LinkedIn</span>
+                  </a>
+                </li> -->
+              </ul>
 
+              <hr class="contact-sep" aria-hidden="true">
+
+              <div class="contact-actions">
+                <a class="btn-sm btn-outline" href="/cv.pdf" target="_blank" rel="noopener noreferrer">Certificados</a>
+              </div>
+            </div>
+          </article>
+        </div><!-- /.grid -->
+      </div><!-- /.container -->
+    </section>
+  </main>
 
   <!-- =========================================================
        FOOTER
@@ -314,9 +322,10 @@
     </div>
   </footer>
 
-  <!-- ===== Three.js para el fondo 3D del HERO ===== -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script>
+  <!-- ===== Three.js para el fondo 3D del HERO (ESM) ===== -->
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+
     // ===== Ajustes (red blanca) =====
     const SETTINGS = {
       COUNT: window.innerWidth < 600 ? 120
@@ -473,14 +482,14 @@
       }
     });
 
-    // Limpieza de recursos (buena práctica)
+    // Limpieza
     window.addEventListener('beforeunload', () => {
       renderer.dispose();
       points.geometry.dispose(); points.material.dispose();
       lines.geometry.dispose();  lines.material.dispose();
     });
 
-    // Año dinámico footer
+    // Año dinámico
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
   </script>
